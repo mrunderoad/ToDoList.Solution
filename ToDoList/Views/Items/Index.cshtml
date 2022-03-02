@@ -6,20 +6,25 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   </head>
   <body>
-  @using ToDoList.Models;
-    <h1>To Do List</h1>
-    @if (Model.Count == 0)
-    {
-      <p>There are no items in the list.</p>
-    }
-    <ul>
-      @foreach (Item item in Model)
-      {
-        <li>@item.Description</li>
-      }
-      
-    </ul>
-    <h2>Create a new Item here!</h2>
-    <a href="/items/new">Add a new Item.</a>
+    <div class="container">
+      @using ToDoList.Models;
+        <h1>To Do List</h1>
+        @if (Model.Count == 0)
+        {
+          <p>There are no items in the list.</p>
+        }
+        <ul>
+          @foreach (Item item in Model)
+          {
+           <li><a href='/items/@item.Id'>@item.Description</a></li>
+          }
+          
+        </ul>
+        <h2>Create a new Item here!</h2>
+        <a href="/items/new">Add a new Item.</a>
+        <form action="/items/delete" method="post">
+        <button type="submit" name="button">Clear All Items</button>
+        </form>
+    </div>
   </body>
 </html>
