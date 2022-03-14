@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ToDoList.Models;
+// using Microsoft.EntityFrameworkCore.Design;
 
 namespace ToDoList
 {
