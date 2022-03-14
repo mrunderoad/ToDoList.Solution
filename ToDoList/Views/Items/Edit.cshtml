@@ -2,8 +2,8 @@
   Layout = "_Layout";
 }
 
+@using ToDoList.Models
 @model ToDoList.Models.Item
-
 <h2>Edit</h2>
 
 <h4>Edit this task: @Html.DisplayFor(model => model.Description)</h4>
@@ -14,9 +14,10 @@
 
   @Html.LabelFor(model => model.Description)
   @Html.EditorFor(model => model.Description)
-
-  @Html.Label("Select Category")
-  @Html.DropDownList("CategoryId")
+  <br>
+  @Html.Label("Mark Item As Completed")
+  @Html.CheckBoxFor(model => model.Completed)
+  <br>
   
   <input type="submit" value="Save" />
 }

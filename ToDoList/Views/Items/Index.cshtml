@@ -14,7 +14,7 @@
 
 @foreach (Item item in Model)
 {
-  <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId })</li>
+  <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) @Html.DisplayFor(model => item.Date.Day)/@Html.DisplayFor(model => item.Date.Month)/@Html.DisplayFor(model => item.Date.Year) @Html.CheckBoxFor(Model => item.Completed, new { @disabled = "disabled" })</li>
 }
 
 <p>@Html.ActionLink("Add new item", "Create")</p>

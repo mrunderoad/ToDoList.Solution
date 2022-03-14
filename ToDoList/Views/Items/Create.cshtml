@@ -11,6 +11,9 @@
     @Html.LabelFor(model => model.Description)
     @Html.TextBoxFor(model => model.Description)
 
+    @Html.Label("Date added")
+    @Html.TextBoxFor(model => model.Date, new { type = "date" })
+
     @Html.Label("Select category")
     @Html.DropDownList("CategoryId")
 

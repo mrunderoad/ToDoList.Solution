@@ -17,9 +17,9 @@ namespace ToDoList.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
+    public ActionResult Index(Item item)
     {
-      return View(_db.Items.ToList());
+      return View(_db.Items.OrderBy(item => item.Date.Day).ToList());
     }
 
     public ActionResult Create()
