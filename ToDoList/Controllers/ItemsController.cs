@@ -111,5 +111,10 @@ namespace ToDoList.Controllers
       return RedirectToAction("Index");
     }
 
+    public ActionResult CompletedItems()
+    {
+      return View(_db.Items.ToList());
+    }
+
   }
 }
