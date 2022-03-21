@@ -15,6 +15,7 @@ namespace ToDoList.Models
     public string Description { get; set; }
     public DateTime Date { get; set; }
     public bool Completed { get; set; }
+    public virtual ApplicationUser User { get; set; }
     public virtual ICollection<CategoryItem> JoinEntities { get; }
   }
     

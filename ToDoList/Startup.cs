@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ToDoList.Models;
-// using Microsoft.EntityFrameworkCore.Design;
+//new code
+using Microsoft.AspNetCore.Identity;
 
 namespace ToDoList
 {
@@ -15,7 +16,7 @@ namespace ToDoList
     {
       var builder = new ConfigurationBuilder()
           .SetBasePath(env.ContentRootPath)
-          .AddJsonFile("appsettings.json"); 
+          .AddJsonFile("appsettings.json");
       Configuration = builder.Build();
     }
 
@@ -28,18 +29,41 @@ namespace ToDoList
       services.AddEntityFrameworkMySql()
         .AddDbContext<ToDoListContext>(options => options
         .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
+
+      //new code
+      services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ToDoListContext>()
+                .AddDefaultTokenProviders();
+
+      services.Configure<IdentityOptions>(options =>
+      {
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 0;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredUniqueChars = 0;
+      });
     }
 
     public void Configure(IApplicationBuilder app)
     {
       app.UseDeveloperExceptionPage();
-      app.UseStaticFiles();
+
+      //new code
+      app.UseAuthentication(); 
+
       app.UseRouting();
+
+      //new code
+      app.UseAuthorization();
 
       app.UseEndpoints(routes =>
       {
         routes.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
       });
+
+      app.UseStaticFiles();
 
       app.Run(async (context) =>
       {
